@@ -7,6 +7,10 @@ body {
     @apply bg-gray-200;
 }
 
+input {
+    @apply px-2;
+}
+
 h1 {
     @apply text-2xl font-bold;
 }
@@ -15,7 +19,7 @@ h1 {
     @apply flex flex-col p-4 gap-6 bg-gray-200 min-h-screen;
 
     .toolbar {
-        @apply flex p-4 bg-white shadow-xl mb-6;
+        @apply grid p-4 bg-white shadow-xl mb-6 grid-flow-row md:grid-flow-col gap-2;
     }
 
     .employees_list {

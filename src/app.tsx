@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { ChangeEventHandler, useEffect, useState } from "react"
 import "./app.scss"
 import * as API from './api';
 import { Employee } from "./model";
@@ -11,12 +11,26 @@ import { isNullOrUndefined } from "./util";
 
 const noImageUrl = 'https://usercontent.one/wp/www.vocaleurope.eu/wp-content/uploads/no-image.jpg?media=1642546813'
 
+type sortFilterType = "name" | "office"
+
 const App = () => {
     const [employees, setEmployees] = useState<Array<Employee> | undefined>();
+    const [sort, setSort] = useState<sortFilterType>("name");
+    const [filterText, setFilterText] = useState<string>();
+    const [filterBy, setFilterBy] = useState<sortFilterType>("name");
+    
+
 
     useEffect(() => {
         API.getEmployees().then(data => setEmployees(data))
     }, [])
+
+    useEffect(() => {
+        if (employees) {
+            const _employees = [...employees]
+            setEmployees(_employees.sort((a, b) => String(a[sort]).toLowerCase() > String(b[sort]).toLowerCase() ? 1 : -1))
+        }
+    }, [sort])
 
     const openLink = (media: "linkedIn" | "gitHub" | "twitter", accountName: string) => {
         if (!isNullOrUndefined(accountName)) {
@@ -39,16 +53,59 @@ const App = () => {
         }
     }
 
+    const sortEmployees = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSort(event.target.value as sortFilterType)
+    }
+
+    const filterByHandle = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setFilterBy(event.target.value as sortFilterType)
+    }
+
+    const filterEmployees = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFilterText(event.target.value)
+    }
+
+    const getFilteredEmployees = (): Employee[] | undefined => {
+        if (filterText && filterText.length > 0) {
+            return employees?.filter(employee => String(employee[filterBy!]).toLowerCase().includes(filterText.toLowerCase()))
+        } else {
+            return employees
+        }
+    }
+
     return (
         <div className="employees_page">
             <h1>The fellowship of the tretton37</h1>
             {employees ?
                 <div>
                     <div className="toolbar">
-                        Tools go here ...
+                        <div className="flex grow">
+                            <div className="flex grow gap-2">
+                                <label htmlFor="filterInput" className="whitespace-nowrap text-right">Filter by:</label>
+                                <select id="filterInput" name="sort"
+                                    className="block rounded-md w-36 border border-gray-300 shadow-sm focus:ring-primary-200 focus:ring-opacity-50"
+                                    onChange={filterByHandle}
+                                >
+                                    <option selected value={"name"}>Name</option>
+                                    <option value={"office"}>Office</option>
+                                </select>
+                                <input className="flex grow w-full w-36 rounded-md border-gray-300 shadow-sm border focus:border-primary-200" 
+                                    type="text" value={filterText} onChange={filterEmployees} />
+                            </div>
+                        </div>
+                        <div className="flex align gap-2 justify-normal md:justify-end">
+                            <label htmlFor="employees_sort" className="whitespace-nowrap">Sort by:</label>
+                            <select id="employees_sort" name="sort"
+                                className="block w-36 rounded-md border border-gray-300 shadow-sm focus:ring-primary-200 focus:ring-opacity-50"
+                                onChange={sortEmployees}
+                            >
+                                <option selected value={"name"}>Name</option>
+                                <option value={"office"}>Office</option>
+                            </select>
+                        </div>
                     </div>
                     <div className="employees_list">
-                        {employees?.map((employee, i) =>
+                        {getFilteredEmployees()?.map((employee, i) =>
                             <div className="employees_item" key={i}>
                                 <img src={employee.imagePortraitUrl ?? noImageUrl} alt="" className="block max-h-96 h-full object-cover" />
                                 <div className="flex">
