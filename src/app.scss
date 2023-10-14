@@ -1,0 +1,29 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-gray-200;
+}
+
+h1 {
+    @apply text-2xl font-bold;
+}
+
+.employees_page {
+    @apply flex flex-col p-4 gap-6 bg-gray-200 min-h-screen;
+
+    .toolbar {
+        @apply flex p-4 bg-white shadow-xl mb-6;
+    }
+
+    .employees_list {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+
+        .employees_item {
+            @apply flex flex-col p-2 md:p-4 font-semibold bg-white shadow-xl gap-4;
+        }
+    }
+
+}
