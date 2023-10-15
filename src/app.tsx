@@ -19,7 +19,7 @@ const App = () => {
     const [sort, setSort] = useState<sortFilterType>("name");
     const [filterText, setFilterText] = useState<string>();
     const [filterBy, setFilterBy] = useState<sortFilterType>("name");
-    const [gridList, setGridList] = useState<"grid" | "list">("list");
+    const [gridList, setGridList] = useState<"grid" | "list">("grid");
 
 
 
