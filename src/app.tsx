@@ -85,9 +85,14 @@ const App = () => {
             {employees ?
                 <div>
                     <div className="toolbar">
-                        <button className="border rounded-md px-2 py-1 mr-2 bg-gray-100 w-8" onClick={toggleGridList}>
-                            <FontAwesomeIcon icon={gridList === "grid" ? faGrip : faList} />
-                        </button>
+                        <div className="inline-flex space-x-0.5 rounded-lg border border-gray-300 shadow-sm">
+                            <button className={`rounded-md px-2 py-1 w-10 ${gridList === "grid" ? "bg-primary text-white rounded-tr-none rounded-br-none" : ""}`} onClick={toggleGridList}>
+                                <FontAwesomeIcon icon={faGrip} />
+                            </button>
+                            <button className={`rounded-md px-2 py-1 w-10 ${gridList === "list" ? "bg-primary text-white rounded-tl-none rounded-bl-none" : ""}`} onClick={toggleGridList}>
+                                <FontAwesomeIcon icon={faList} />
+                            </button>
+                        </div>
                         <div className="flex grow w-full">
                             <div className="flex grow gap-2">
                                 <label htmlFor="filterInput" className="whitespace-nowrap text-right leading-8">Filter by:</label>
@@ -153,12 +158,12 @@ const App = () => {
                                     <img src={employee.imagePortraitUrl ?? noImageUrl} alt="" className="block max-w-20 w-20 h-full object-cover" />
                                     <div className="grid grid-cols-2 gap-2 w-full">
                                         <div className="flex flex-col gap-2">
-                                            <span>{employee.name}</span>
-                                            <span>Office: {employee.office}</span>
+                                            <span className="font-bold">{employee.name}</span>
+                                            <span><b className="font-semibold">Office:</b> {employee.office}</span>
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <span>Area: {employee.area}</span>
-                                            <span>Role: {employee.primaryRole}</span>
+                                            <span><b className="font-semibold">Area:</b> {employee.area}</span>
+                                            <span><b className="font-semibold">Role:</b> {employee.primaryRole}</span>
                                         </div>
                                     </div>
                                 </div>

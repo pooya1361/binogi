@@ -34,7 +34,7 @@ h1 {
         @apply flex flex-col max-h-20 gap-4;
 
         .employee_list_item {
-            @apply flex p-1 md:p-2 font-semibold bg-white shadow-xl gap-4;
+            @apply flex p-1 md:p-2 font-normal md:font-semibold bg-white shadow-xl gap-2 md:gap-4;
         }
     }
 
