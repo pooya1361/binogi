@@ -1,0 +1,7 @@
+.employees_grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+
+    .employees_grid_item {
+        @apply flex flex-col p-2 md:p-4 font-semibold bg-white shadow-xl gap-4;
+    }
+}

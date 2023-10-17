@@ -4,6 +4,7 @@ import Linkedin from "../icons/linkedin"
 import Twitter from "../icons/twitter"
 import { Employee } from "../model"
 import { isNullOrUndefined, noImageUrl, openLink } from "../util"
+import "./gridView.scss"
 type GridViewProps = {
     employees?: Employee[]
 }

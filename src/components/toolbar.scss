@@ -1,0 +1,4 @@
+
+.toolbar {
+    @apply flex flex-wrap md:flex-nowrap p-4 bg-white shadow-xl mb-6 grid-flow-row md:grid-flow-col gap-2 justify-start;
+}

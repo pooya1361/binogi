@@ -1,6 +1,8 @@
 import React from "react"
 import { Employee } from "../model"
 import { noImageUrl } from "../util"
+import "./listView.scss"
+
 type ListViewProps = {
     employees?: Employee[]
 }

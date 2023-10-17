@@ -17,25 +17,4 @@ h1 {
 
 .employees_page {
     @apply flex flex-col p-4 gap-6 bg-gray-200 min-h-screen;
-
-    .toolbar {
-        @apply flex flex-wrap md:flex-nowrap p-4 bg-white shadow-xl mb-6 grid-flow-row md:grid-flow-col gap-2 justify-start;
-    }
-
-    .employees_grid {
-        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
-
-        .employees_grid_item {
-            @apply flex flex-col p-2 md:p-4 font-semibold bg-white shadow-xl gap-4;
-        }
-    }
-
-    .employees_list {
-        @apply flex flex-col max-h-20 gap-4;
-
-        .employee_list_item {
-            @apply flex p-1 md:p-2 font-normal md:font-semibold bg-white shadow-xl gap-2 md:gap-4;
-        }
-    }
-
 }

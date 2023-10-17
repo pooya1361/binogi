@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useState } from "react"
 import { gridListModeType } from "../app"
 import { Employee } from "../model"
+import "./toolbar.scss"
 
 type ToolbarProps = {
     gridList: gridListModeType
