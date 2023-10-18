@@ -33,8 +33,9 @@ const Toolbar = (props: ToolbarProps) => {
                     <select id="filterInput" name="sort"
                         className="block rounded-md w-36 border border-gray-300 shadow-sm focus:ring-primary-200 focus:ring-opacity-50"
                         onChange={props.handleFilterBy}
+                        defaultValue={"name"}
                     >
-                        <option selected value={"name"}>Name</option>
+                        <option value={"name"}>Name</option>
                         <option value={"office"}>Office</option>
                     </select>
                     <input className="flex grow w-full w-36 rounded-md border-gray-300 shadow-sm border focus:border-primary-200"
@@ -47,8 +48,9 @@ const Toolbar = (props: ToolbarProps) => {
                 <select id="employees_sort" name="sort"
                     className="block w-36 rounded-md border border-gray-300 shadow-sm focus:ring-primary-200 focus:ring-opacity-50"
                     onChange={props.sortEmployees}
+                    defaultValue={"name"}
                 >
-                    <option selected value={"name"}>Name</option>
+                    <option value={"name"}>Name</option>
                     <option value={"office"}>Office</option>
                 </select>
             </div>

@@ -1,12 +1,10 @@
 import { Employee } from "./model";
 const url = 'https://api.1337co.de/v3/';
 
-const getHeaders = (authorizationToken?: string) => new Headers({
+const getHeaders = (authorizationToken: string) => new Headers({
     'Content-Type': 'application/json; charset=utf-8',
     'Accept': 'application/json',
-    // 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36 PostmanRuntime/7.33.0',
-    // 'Vary': 'Origin,Access-Control-Request-Method,Access-Control-Request-Headers',
-    'Authorization': 'api-key 14:2023-10-13:sara.askeback@tretton37.com ad148c4ac45af8402620e5d1ac1d91746191b4849412f90a6dea749f2d42ab6f'
+    'Authorization': authorizationToken
 })
 
 
@@ -43,7 +41,7 @@ const APICall = async (url: string, method: "POST" | "GET" | "DELETE" | "PUT", h
     }
 })
 
-export const getEmployees = async (): Promise<Array<Employee>> => APICall(url + "employees", 'GET', getHeaders(), undefined,
+export const getEmployees = async (apiKey: string): Promise<Array<Employee>> => APICall(url + "employees", 'GET', getHeaders(apiKey), undefined,
     (response => {
         return Array<Employee>(response)
     }), ((err) => {
