@@ -7,6 +7,7 @@ import GridView from "./components/gridView";
 import ListView from "./components/listView";
 import { faSpinner, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import env from "react-dotenv"
 
 export type sortFilterType = "name" | "office"
 export type gridListModeType = "grid" | "list"
@@ -22,9 +23,13 @@ const App = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        // Read .env file if exists
+        const envAPIKey = env.API_KEY
+
         // Read API key from URL
         const queryParameters = new URLSearchParams(window.location.search)
-        const _apiKey = queryParameters.get("apikey")
+        const _apiKey = queryParameters.get("apikey") ?? envAPIKey
+
         if (_apiKey) {
             setApiKeyProvided(true)
             setApiKey(_apiKey)
@@ -45,11 +50,8 @@ const App = () => {
     }, [sort])
 
     const loadEmployees = () => {
-        console.log("🚀 ~ file: app.tsx:49 ~ API.getEmployees ~ apiKey:", apiKey)
         setLoading(true)
-        API.getEmployees(apiKey!).then(data => setEmployees(data)).catch(err => {
-            console.log("🚀 ~ file: app.tsx:27 ~ API.getEmployees ~ err:", err)
-        }).finally(() => setLoading(false))
+        API.getEmployees(apiKey!).then(data => setEmployees(data)).finally(() => setLoading(false))
     }
 
     const sortEmployees = (event: React.ChangeEvent<HTMLSelectElement>) => {
