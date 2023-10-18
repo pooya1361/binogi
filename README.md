@@ -59,4 +59,5 @@ yarn build
 ```
 # Attention
 The api-key should be provided by user either in the URL or in the app. You'll be guided in the app.
+You can also add the api-key in `.env` file
 
