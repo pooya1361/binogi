@@ -15,6 +15,10 @@ h1 {
     @apply text-2xl font-bold;
 }
 
-.employees_page {
-    @apply flex flex-col p-4 gap-6 bg-gray-200 min-h-screen;
+h3 {
+    @apply text-lg font-bold;
+}
+
+.label {
+    @apply text-[10px] bg-gray-100 border border-gray-200 rounded-full px-2;
 }

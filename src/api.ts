@@ -1,10 +1,9 @@
-import { Employee } from "./model";
-const url = 'https://api.1337co.de/v3/';
+import { Recipe as Recipe, SearchResult } from "./model";
+const url = 'https://api.edamam.com/api/recipes/v2?app_id=df53c267&app_key=bd80595496a524a833554462aa41a04c&type=public';
 
-const getHeaders = (authorizationToken: string) => new Headers({
+const getHeaders = () => new Headers({
     'Content-Type': 'application/json; charset=utf-8',
-    'Accept': 'application/json',
-    'Authorization': authorizationToken
+    'Accept': 'application/json'
 })
 
 
@@ -41,11 +40,21 @@ const APICall = async (url: string, method: "POST" | "GET" | "DELETE" | "PUT", h
     }
 })
 
-export const getEmployees = async (apiKey: string): Promise<Array<Employee>> => APICall(url + "employees", 'GET', getHeaders(apiKey), undefined,
-    (response => {
-        return Array<Employee>(response)
+export const searchRecipe = async (query: string): Promise<SearchResult> => APICall(url + "&q=" + query, 'GET', getHeaders(), undefined,
+    ((response: SearchResult) => {
+        return response
     }), ((err) => {
-        console.log('💥 in getEmployees() ', err);
+        console.log('💥 in searchRecipe() ', err);
+        return []
+    })
+)
+
+export const fetchNextPage = async (url: string): Promise<SearchResult> => APICall(url, 'GET', getHeaders(), undefined,
+    ((response: SearchResult) => {
+        console.log("🚀 ~ response:", response)
+        return response
+    }), ((err) => {
+        console.log('💥 in fetchNextPage() ', err);
         return []
     })
 )
