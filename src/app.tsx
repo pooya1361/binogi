@@ -10,7 +10,7 @@ const App = () => {
     const [recipes, setRecipes] = useState<Array<Recipe>>([]);
     const [bookmarkedRecipes, setBookmarkedRecipes] = useState<Array<Recipe>>([]);
     const [searchInfo, setSearchInfo] = useState<SearchResult>();
-    const [searchText, setSearchText] = useState("cocktail");
+    const [searchText, setSearchText] = useState("");
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe>();
 
     const search = () => {
@@ -49,7 +49,7 @@ const App = () => {
 
     const isBookmarked = (recipe: Recipe) => bookmarkedRecipes.findIndex(bmr => bmr.url === recipe.url) > -1
 
-    useEffect(() => search(), [])
+    // useEffect(() => search(), [])
 
     // useEffect(() => setSelectedRecipe(recipes[0]), [recipes])
 
